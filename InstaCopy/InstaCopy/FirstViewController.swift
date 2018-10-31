@@ -8,28 +8,24 @@
 
 import UIKit
 
-class FirstViewController: UIViewController {
-
+class FirstViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    var imageArray:[UIImage] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        
+        imageArray = [UIImage(named: "m1"),UIImage(named: "m2"),UIImage(named: "m3"),UIImage(named: "m4"),UIImage(named: "m5"),UIImage(named: "m6"),UIImage(named: "m7"),UIImage(named: "m8"),UIImage(named: "m9"),UIImage(named: "m10"),UIImage(named: "m11"),UIImage(named: "m12")] as! [UIImage]
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return imageArray.count
     }
-    */
-
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "collectionViewCell", for: indexPath) as! CollectionViewCell
+        cell.myImage.image = imageArray[indexPath.row]
+        return cell 
+    }
 }

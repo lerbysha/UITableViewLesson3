@@ -12,6 +12,15 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var segmentControl: UISegmentedControl!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var avatarImage: UIImageView!
+    @IBOutlet weak var pubCount: UILabel!
+    @IBOutlet weak var folCount: UILabel!
+    @IBOutlet weak var myFolCount: UILabel!
+    @IBOutlet weak var nick: UILabel!
+    @IBOutlet weak var status: UILabel!
+    
+    let petya = Person(image:UIImage(named: "ava")!, likeCount: "123", nick: "RealMedvedev", pubCount: "13", folCount:"1.2m", myFolCount:"143", status: "I'M HAPPY ")
+    
     
     private lazy var firstViewController: FirstViewController = {
         // Load Storyboard
@@ -55,12 +64,7 @@ class ViewController: UIViewController {
     static func viewController() -> ViewController {
         return UIStoryboard.init(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ViewController") as! ViewController
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    
+        
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
         updateView()
     }
@@ -117,11 +121,19 @@ class ViewController: UIViewController {
         updateView()
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupView()
+        
+        avatarImage.image = petya.image
+        nick.text = petya.nick
+        folCount.text = petya.folCount
+        myFolCount.text = petya.myFolCount
+        status.text = petya.status
+        pubCount.text = petya.pubCount
+        
+        avatarImage.layer.cornerRadius = avatarImage.frame.width / 2
+        avatarImage.clipsToBounds = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
